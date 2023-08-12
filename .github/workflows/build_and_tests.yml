@@ -40,7 +40,6 @@ jobs:
             POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
             POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
             ACCEPT_EULA: Y
-            MSSQL_SA_PASSWORD: ${{ secrets.MSSQL_DATABASE_PASSWORD }}
             MSSQL_PID: Developer
             PIP_VERSION: ${{ secrets.WEBAPP_PIP_VERSION || '23.1.2' }}
             POETRY_VERSION: ${{ secrets.WEBAPP_POETRY_VERSION || '1.5.1' }}
