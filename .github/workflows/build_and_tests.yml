@@ -51,6 +51,8 @@ jobs:
             ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
             REDIS_DSN: ${{ secrets.REDIS_DSN }}
             WEBAPP_HOST: ${{ secrets.WEBAPP_HOST }}
+            PGADMIN_DEFAULT_EMAIL: ${{ secrets.PGADMIN_DEFAULT_EMAIL }}
+            PGADMIN_DEFAULT_PASSWORD: ${{ secrets.PGADMIN_DEFAULT_PASSWORD }}
             MSSQL_DATABASE_HOST: ${{ secrets.MSSQL_DATABASE_HOST }}
             MSSQL_DATABASE_NAME: ${{ secrets.MSSQL_DATABASE_NAME }}
             MSSQL_DATABASE_PASSWORD: ${{ secrets.MSSQL_DATABASE_PASSWORD }}
