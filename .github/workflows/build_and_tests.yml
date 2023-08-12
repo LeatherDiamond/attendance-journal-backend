@@ -58,7 +58,7 @@ jobs:
             MSSQL_DATABASE_PORT: ${{ secrets.MSSQL_DATABASE_PORT }}
             MSSQL_DATABASE_USERNAME: ${{ secrets.MSSQL_DATABASE_USERNAME }}
             DJANGO_SUPERUSER_USERNAME: ${{ secrets.DJANGO_SUPERUSER_USERNAME }}
-            DJANGO_SUPERUSER_PASSWORD: ${{ secrets.DJANGO_SUPERUSER_USERNAME }}
+            DJANGO_SUPERUSER_PASSWORD: ${{ secrets.DJANGO_SUPERUSER_PASSWORD }}
             HOST_FOR_TESTS: ${{ secrets.HOST_FOR_TESTS }}
         run: docker-compose up -d
             
