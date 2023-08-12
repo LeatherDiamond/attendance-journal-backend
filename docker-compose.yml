@@ -1,0 +1,140 @@
+version: '3.9'
+services:
+
+  redis:
+    container_name: journal.redis
+    image: redis:7.0.12-alpine3.18
+    networks:
+      - journal
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - .local/services/redis:/var/lib/redis/data
+    init: true
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  db:
+    container_name: journal.db
+    image: postgres:15.2
+    networks: 
+      - journal
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - .local/services/db:/var/lib/postgresql/data
+    init: true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  pgadmin:
+    container_name: journal.pgadmin
+    image: dpage/pgadmin4:7.1
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    volumes:
+      - .local/services/pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: always
+    networks:
+      - journal
+    depends_on:
+      - db
+
+  mssql_db:
+    container_name: journal.mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    networks: 
+      - journal
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=${MSSQL_DATABASE_PASSWORD}
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - .local/services/mssql:/var/lib/mssql/data
+    init: true
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "${MSSQL_DATABASE_PASSWORD}", "-Q", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  webapp:
+    build:
+      args:
+        - PIP_VERSION=${WEBAPP_PIP_VERSION:-23.1.2}
+        - POETRY_VERSION=${WEBAPP_POETRY_VERSION:-1.5.1}
+        - PYTHON_VERSION=${WEBAPP_PYTHON_VERSION:-3.11}
+        - VERSION=${WEBAPP_VERSION:-dev}
+      context: .
+    container_name: journal.webapp
+    image: webapp:latest
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      PRIMARY_DATABASE_URL: ${PRIMARY_DATABASE_URL}
+      DEBUG_MODE: ${DEBUG_MODE}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REDIS_DSN: ${REDIS_DSN}
+      WEBAPP_HOST: ${WEBAPP_HOST}
+      MSSQL_DATABASE_HOST: ${MSSQL_DATABASE_HOST}
+      MSSQL_DATABASE_NAME: ${MSSQL_DATABASE_NAME}
+      MSSQL_DATABASE_PASSWORD: ${MSSQL_DATABASE_PASSWORD}
+      MSSQL_DATABASE_PORT: ${MSSQL_DATABASE_PORT}
+      MSSQL_DATABASE_USERNAME: ${MSSQL_DATABASE_USERNAME}
+      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_USERNAME}
+      HOST_FOR_TESTS: ${HOST_FOR_TESTS}
+    networks:
+      - journal
+    ports:
+      - "8000:8000"
+    volumes:
+      - .local/services/webapp:/app/:ro
+    init: true
+    depends_on:
+      db:
+        condition: service_healthy
+
+  scheduler:
+    container_name: journal.scheduler
+    image: webapp:latest
+    environment:
+      REDIS_DSN: ${REDIS_DSN}
+      WEBAPP_HOST: ${WEBAPP_HOST}
+      DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
+      DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
+    networks:
+      - journal
+    volumes:
+      - .local/services/apscheduler:/app/:ro
+    init: true
+    entrypoint: ["project/entrypoint-scheduler.sh"]
+    depends_on:
+      redis:
+        condition: service_started
+      webapp:
+        condition: service_started
+
+networks:
+  journal:
+    name: journal.network
+    driver: bridge
