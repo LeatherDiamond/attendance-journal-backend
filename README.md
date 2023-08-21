@@ -1,11 +1,3 @@
-# Attendance journal's admin panel
-The project is an admin panel for a web application called "Attendance Journal" 
-that is being created for teachers and methodists to improve the organization of their work. 
-The project provides an API for authentication, registration, viewing, modifying, deleting, 
-and blocking journal users, division users by roles (administrators, teachers and methodists), 
-synchronization of two databases. 
-Access to the specified functionality is granted to a special user-administrator.
-
 ## Navigation
 * ***[Software version](#software-version)***
 * ***[Getting started](#gerring-started)***
@@ -14,6 +6,14 @@ Access to the specified functionality is granted to a special user-administrator
 * ***[Database administration](#database-administration)***
 * ***[Running black](#running-black)***
 * ***[Running tests](#running-tests)***
+
+## Project description
+
+The project is an admin panel for a web application named "Attendance Journal," designed to enhance the organizational efficiency of teachers and methodists. It offers a RESTful API, encompassing features like authentication, registration, user management (viewing, modifying, deleting, blocking) within the journal. Additionally, it involves role-based user division (administrators, teachers, and methodists) and the synchronization of dual databases. The designated functionalities are accessible exclusively to a designated user-administrator.
+
+This service functions as a backend, providing a RESTful API. Its comprehensive features span across authentication and authorization mechanisms, user segmentation based on specific roles, as well as the management of personal and CRM data. Simultaneously, the service interacts with multiple databases, with PostgreSQL serving as the primary database and MSSQL functioning in a read-only mode. This dual database setup ensures a seamless transition to a new service. To handle real-time data requirements, Redis comes into play.
+
+The API, along with its underlying business logic, is realized through a robust tech stack composed of Django, DRF, and Spectacular. The dynamic duo of Django ORM and SqlAlchemy facilitate database operations, while APScheduler manages periodic tasks. For testing, the service harnesses the power of pytest, enabling a structured approach with custom fixtures and scenario coverage. The result is a clean environment post-testing.
 
 ## Software versions
 
