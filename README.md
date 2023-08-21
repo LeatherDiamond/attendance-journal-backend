@@ -1,4 +1,5 @@
 ## Navigation
+* ***[Project description](#project-description)***
 * ***[Software version](#software-version)***
 * ***[Getting started](#gerring-started)***
 * ***[Creating superuser](#creating-superuser)***
