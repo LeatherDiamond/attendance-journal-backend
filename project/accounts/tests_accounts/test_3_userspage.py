@@ -7,7 +7,7 @@ class TestUserModel:
     API_URL = f"{host}/auth/users/"
 
     def response_to_api_url(self, token, **kwargs):
-        rs = requests.get(self.API_URL, params=kwargs, headers={"Authorization": f"Token {token}"}, timeout=5)
+        rs = requests.get(self.API_URL, params=kwargs, headers={"Authorization": f"Token {token}"})
         return rs
 
     def test_unauthorized_request_to_endpoint(self):
