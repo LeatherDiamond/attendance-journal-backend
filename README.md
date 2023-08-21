@@ -104,7 +104,7 @@ docker compose up --build
 ```
 docker exec -it journal.webapp bash
 ```
-6. After you entered the webapp container, launch tests:
+5. After you entered the webapp container, launch tests:
 ```
 pytest
 ``` 
