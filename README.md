@@ -113,6 +113,7 @@ pytest
 1. Make sure that repository is already cloned on your computer, docker is launched, images already built and are ready for use and containers are not started yet;
 2. Navigate to the root derictory of the project;
 3. Configure `.env` file by assigning values to the variables defined in `.env.sample`;
+ > ###### **NOTE:**
  > Use MSSQL settings mentioned above and additionally set in **PRIMARY_DATABASE_URL** configuration for your local database (for example PRIMARY_DATABASE_URL=postgres://admin:admin@localhost:5432/testbase)
 4. Activate virtual environment:
 ```
@@ -142,7 +143,8 @@ python project/manage.py runserver
 ```
 pytest
 ```
-> **NOTE:** If you will try to put the command in another console, make sure that virtual environment is active - *point 4* of the current instruction).
+> ###### **NOTE:**
+> If you will try to put the command in another console, make sure that virtual environment is active - *point 4* of the current instruction).
 
 # License
 
