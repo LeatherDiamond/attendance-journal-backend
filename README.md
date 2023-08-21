@@ -1,12 +1,13 @@
 ## Navigation
 * ***[Project description](#project-description)***
-* ***[Software version](#software-version)***
-* ***[Getting started](#gerring-started)***
+* ***[Software version](#software-versions)***
+* ***[Getting started](#getting-started)***
 * ***[Creating superuser](#creating-superuser)***
 * ***[Using the api](#using-the-api)***
 * ***[Database administration](#database-administration)***
 * ***[Running black](#running-black)***
 * ***[Running tests](#running-tests)***
+* ***[License](#license)***
 
 ## Project description
 
@@ -105,3 +106,7 @@ MSSQL_DATABASE_HOST=localhost
 8. Use ```python project/create_default_db_data.py``` to create default superuser in your database with credentials provided in your `.env` file:
 9. Use ```python project/manage.py runserver```
 10. Use ```pytest``` command in console to start tests (**NOTE:** ***If you will try to put the command in another console, make sure that virtual environment is active*** - *point 4* ***of the current instruction***).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/LeatherDiamond/attendance-journal-backend/blob/main/LICENSE) file for details.
