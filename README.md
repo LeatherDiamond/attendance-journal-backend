@@ -144,7 +144,7 @@ python project/manage.py runserver
 pytest
 ```
 > ###### **NOTE:**
-> If you will try to put the command in another console, make sure that virtual environment is active - *point 4* of the current instruction).
+> If you will try to put the command in another console, make sure that virtual environment is active - *point 4* of the current instruction.
 
 # License
 
