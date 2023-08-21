@@ -15,6 +15,11 @@ This service functions as a backend, providing a RESTful API. Its comprehensive 
 
 The API, along with its underlying business logic, is realized through a robust tech stack composed of Django, DRF, and Spectacular. The dynamic duo of Django ORM and SqlAlchemy facilitate database operations, while APScheduler manages periodic tasks. For testing, the service harnesses the power of pytest, enabling a structured approach with custom fixtures and scenario coverage. The result is a clean environment post-testing.
 
+The codebase stands as a testament to quality, undergoing linter checks and type validation by mypy. The codebase adheres to a consistent style and architectural design influenced by Django's paradigms. Furthermore, the service is containerized within a Docker image. Both the Dockerfile and docker-compose.yml were developed and maintained, with the project adhering to the 12-factor principles. Versioning, environment variable configurations, and health checks for all components ensure a robust deployment.
+
+To enhance user experience, the project boasts automated documentation via Swagger and a comprehensive README guide. This guide not only aids in using the service but also provides insights into future development and deployment processes. Ultimately, the project embodies a holistic approach to enhancing administrative processes through technological prowess.
+
+
 ## Software versions
 
 - python:3.11.3
