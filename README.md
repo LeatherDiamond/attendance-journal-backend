@@ -9,7 +9,6 @@
 * ***[Running tests](#running-tests)***
   * ***[Running tests inside the container](#running-tests-inside-the-container)***
   * ***[Running tests locally](#running-tests-locally)***
-* ***[License](#license)***
 
 # Project description
 
@@ -145,7 +144,3 @@ pytest
 ```
 > ###### **NOTE:**
 > If you will try to put the command in another console, make sure that virtual environment is active - *point 4* of the current instruction.
-
-# License
-
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/LeatherDiamond/attendance-journal-backend/blob/main/LICENSE) file for details.
